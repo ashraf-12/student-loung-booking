@@ -1,53 +1,44 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f0f4f8;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
+  background: #f7f7f7;
+  padding: 20px;
 }
 
 .container {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  width: 350px;
+  max-width: 500px;
+  margin: auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 20px;
   color: #333;
 }
 
-form label {
+label {
   display: block;
   margin-top: 10px;
   font-weight: bold;
 }
 
-form input {
+input, button {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
   margin-top: 5px;
-  border-radius: 6px;
+  border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 button {
-  margin-top: 20px;
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background: #0077cc;
+  background: #007BFF;
   color: white;
-  font-size: 16px;
+  border: none;
   cursor: pointer;
 }
 
 button:hover {
-  background: #005fa3;
+  background: #0056b3;
 }
