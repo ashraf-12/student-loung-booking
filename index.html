@@ -4,13 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Lounge Booking</title>
-  <!-- Correct file name -->
   <link rel="stylesheet" href="Update styles.css">
+  <style>
+    .instructions {
+      background: #fff8e1;
+      border: 1px solid #fbc02d;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .instructions h2 {
+      color: #e65100;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+    table th {
+      background-color: #f1f1f1;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>Student Lounge Booking</h1>
-    <form id="bookingForm" action="https://formspree.io/f/xwpnpdjo" method="POST">
+
+    <!-- Instructions Section -->
+    <div class="instructions">
+      <h2>Important Instructions</h2>
+      <p>⚠️ The booking must be made at least <b>3 hours before</b> your desired booking time.</p>
+      <p>🔑 To collect the keys, please contact:</p>
+
+      <table>
+        <tr>
+          <th>Role</th>
+          <th>Name</th>
+          <th>Room</th>
+          <th>Phone Number</th>
+        </tr>
+        <tr>
+          <td>MPKK Fellow</td>
+          <td>Murad Alwalidi</td>
+          <td>A-1-7-1</td>
+          <td>+601161884321</td>
+        </tr>
+        <tr>
+          <td>MPKK</td>
+          <td>Ashraf Obad</td>
+          <td>A-2-6-1</td>
+          <td>+60111321056</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Booking Form -->
+    <form id="bookingForm">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
 
@@ -30,9 +85,41 @@
     </form>
   </div>
 
-  <!-- Make sure the file exists with this exact name -->
-  <script src="script.js"></script>
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const fromDate = new Date(document.getElementById("from").value);
+      const now = new Date();
+
+      // Validation: must be at least 3 hours before booking
+      const diffHours = (fromDate - now) / (1000 * 60 * 60);
+      if (diffHours < 3) {
+        alert("⚠️ Booking must be made at least 3 hours in advance!");
+        return;
+      }
+
+      const formData = {
+        name: document.getElementById("name").value,
+        matric: document.getElementById("matric").value,
+        phone: document.getElementById("phone").value,
+        from: document.getElementById("from").value,
+        to: document.getElementById("to").value
+      };
+
+      const response = await fetch("https://formspree.io/f/xwpnpdjo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        alert("✅ Booking submitted successfully!");
+        document.getElementById("bookingForm").reset();
+      } else {
+        alert("❌ Error submitting booking. Please try again.");
+      }
+    });
+  </script>
 </body>
 </html>
-
-
